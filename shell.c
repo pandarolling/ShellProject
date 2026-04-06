@@ -8,10 +8,42 @@
 #include<stdlib.h>
 #include<string.h>
 
+
+
+
+
+
+
+
+
+/*
+   looping function
+*/
+void mysh_loop(){
+   char *line;
+   char **args;
+   int status;
+
+   do{
+      line  = mysh_readline();
+      args = mysh_splitline(line);
+      status = mysh_execute(args);
+      
+      free(line);
+      free(args);
+      
+   }while(status);
+
+}
+
+
+/*
+   main entry point 
+*/
 int main(){
 
    //this loop performs all the input,output and executing of the shell
-   myshell_loop();
+   mysh_loop();
 
 return 0;
 }

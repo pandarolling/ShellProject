@@ -9,12 +9,27 @@
 #include<string.h>
 
 
+/*
+Execute the tokens
+*/
+int mysh_execute(char ** args){
+   
+}
+
+/*
+Split line into tokens
+*/
+char ** mysh_splitline(char * line){
+
+}
 
 
+/*
+readline function
+*/
+char * mysh_readline(){
 
-
-
-
+}
 
 /*
    looping function
@@ -25,6 +40,7 @@ void mysh_loop(){
    int status;
 
    do{
+      printf("mysh>");
       line  = mysh_readline();
       args = mysh_splitline(line);
       status = mysh_execute(args);
@@ -35,7 +51,6 @@ void mysh_loop(){
    }while(status);
 
 }
-
 
 /*
    main entry point 

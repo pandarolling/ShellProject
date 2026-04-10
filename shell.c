@@ -34,10 +34,49 @@ char * mysh_readline(){
    if(getline(&line, &bufsize, stdin) == -1){
      if(feof(stdin)){
 	exit(EXIT_SUCCESS);
-     }else{
-
-    
+     }
+     else{
+      perror("mysh: getline\n");
+      exit(EXIT_FAILURE);
+     }  
 }
+   return line;
+
+#else
+
+#define MYSH_RL_BUFSIZE 1024
+   int bufsize = MYSH_RL_BUFSIZE;
+   int pos = 0;
+   char *buffer = malloc(sizeof(char) * bufsize);
+   int c;
+
+   if(!buffer){
+      fprintf(stderr, "mysh: allocation error");
+      exit(EXIT_FAILURE);
+   }
+
+   while(1){
+      c = getchar();
+
+      if(c == EOF){
+         exit(EXIT_SUCCESS);
+      }else if(c == '\n'){
+         buffer[pos] = '\0';
+         exit(EXIT_SUCCESS);
+      }else{
+         buffer[pos] = c;
+      }
+      pos++;
+
+      if(pos >= bufsize ){
+         bufsize += MYSH_RL_BUFSIZE;
+         buffer = realloc(buffer, bufsize);
+      }
+   }
+
+#endif
+}
+
 
 /*
    looping function

@@ -28,7 +28,15 @@ char ** mysh_splitline(char * line){
 readline function
 */
 char * mysh_readline(){
+#ifdef MYSH_USE_GETLINE
+   char *line = NULL;
+   size_t bufsize = 0;
+   if(getline(&line, &bufsize, stdin) == -1){
+     if(feof(stdin)){
+	exit(EXIT_SUCCESS);
+     }else{
 
+    
 }
 
 /*

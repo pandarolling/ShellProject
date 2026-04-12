@@ -183,7 +183,7 @@ char * mysh_readline(){
          exit(EXIT_SUCCESS);
       }else if(c == '\n'){
          buffer[pos] = '\0';
-         exit(EXIT_SUCCESS);
+         return buffer;
       }else{
          buffer[pos] = c;
       }
@@ -192,13 +192,15 @@ char * mysh_readline(){
       if(pos >= bufsize ){
          bufsize += MYSH_RL_BUFSIZE;
          buffer = realloc(buffer, bufsize);
+         if(!buffer){
+            fprintf(stderr, "mysh : allocation error\n");
+            exit(EXIT_FAILURE);
+         }
       }
    }
 
 #endif
 }
-
-
 
 /*
 Split line into tokens

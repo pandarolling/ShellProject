@@ -4,13 +4,40 @@
 * Description -                                                             
 ************************************************************************************/
 
+#include<sys/wait.h>
+#include<sys/types.h>
+#include<unistd.h>
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
 
 
+/*
+function declaration for builtin shell commands
+*/
+int mysh_cd(char ** args);
+int mysh_exit(char ** args);
+int mysh_help(char ** args);
 
 
+/*
+list of builtin commands, with their correspoding members
+*/
+char *builtin_str[] = {
+   "cd",
+   "help",
+   "exit"
+};
+
+int (*builtin_func[]) (char **) = {
+   &mysh_cd,
+   &mysh_help,
+   &mysh_exit
+};
+
+int mysh_num_builtins(){
+   return sizeof(builtin_str)/sizeof(char *);
+}
 
 
 /*
@@ -31,8 +58,6 @@ int mysh_cd(char ** args){
    return 1;
 
 }
-
-
 
 
 /*

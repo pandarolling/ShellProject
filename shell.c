@@ -1,9 +1,12 @@
 /************************************************************************************
 * MyShell - simple unix shell.                                                      *
 * By - Timothy Kurian and Shubham Yadav                                             *
-* Description -                                                             
+* Description - A lightweight command-line interpreter implemented in C. It         *
+* provides a standard REPL environment, supporting built-in commands                *
+* (cd, help, exit) and external program execution using the                         *
+* fork-exec-wait process model. Features dynamic memory management                  *
+* for robust command parsing.                                                       *
 ************************************************************************************/
-
 #include<sys/wait.h>
 #include<sys/types.h>
 #include<unistd.h>
@@ -221,7 +224,7 @@ char ** mysh_splitline(char *line )
       exit(EXIT_FAILURE);
    }
 
-   token = strtok(line, MYSH_TOK_DELIM);
+   token = strtok(line, MYSH_TOK_DELIM );
    while(token != NULL){
       tokens[position] = token;
       position++;
